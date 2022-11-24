@@ -1,0 +1,126 @@
+/* Style for _layout.php */
+header {
+    align-items: center;
+    background: linear-gradient(to bottom,rgba(94,83,115,1) 50%,rgb(71, 151, 143) 100%);
+    box-shadow: 0 0 25px 1px black;
+    display: flex;
+    height: 60px;
+    position: fixed;
+    left: 0;
+    right: 0;
+    top: 0;
+}
+header * {
+    display: inline;
+}
+.logo {
+    margin-left: 20px;
+    max-height: 50px;
+}
+header li {
+    margin: 15px;
+}
+header li a {
+    color: bisque;
+    font-weight: bold;
+    text-decoration: none;
+}
+header li a:hover {
+    color: aqua;
+}
+/* ------------------------------- */
+/* Style for footer.php */
+html,
+body {
+    height: 100%;
+    margin: 30px 0 0 0;
+    background-color: lightgrey;
+}
+.wrapper {
+    display: flex;
+    flex-direction: column;
+    min-height: 100%;
+    margin: 30px;
+}
+main {
+    flex: 1 1 auto;
+}
+footer {
+    align-items: center;
+    background: linear-gradient(to bottom,rgba(94,83,115,1) 50%,rgb(71, 151, 143) 100%);
+    box-shadow: 0 0 5px 0 black;
+    color: bisque;
+    display: flex;
+    font-weight: bold;
+    height: 50px;
+    padding: 0 0 0 20px;
+}
+/* ------------------------------- */
+/* Style for 404.php */
+.page-404 {
+    display: flex;
+    flex-direction: column;
+    font-size: 1.5vw;
+    justify-content: center;
+    min-height: 85vh;
+}
+.page-404 img {
+    mix-blend-mode: multiply;
+    position: absolute;
+    transform: translateX(-12%) translateY(-2%);
+    width: 30%;
+}
+.page-404__title {
+    display: flex;
+    font-weight: 700;
+    font-size: 15em;
+    justify-content: center;
+    line-height: .7;
+    margin-bottom: 1rem;
+}
+.page-404__title__letter {
+    align-items: center;
+    display: flex;
+    padding: .5rem;
+    margin: 10px;
+}
+.page-404__title__circle {
+    background-color: #4169E1;
+    border-radius: 1em;
+    height: 1em;
+    width: 1em;
+}
+.page-404__subtitle {
+    font-weight: bold;
+    font-size: 3em;
+    text-align: center;
+}
+/* ------------------------------- */
+/* Style for formdata.php */
+.error {
+    color: red;
+}
+.success {
+    color: green;
+}
+/* ------------------------------- */
+/* Style for db.php */
+.demo {
+    box-shadow: 0 5px 15px black;
+}
+.demo-header {
+    background-color: rgb(76, 100, 153);
+}
+.demo-header th {
+    padding: 5px;
+}
+.demo-data {
+    border-top: 1px solid black;
+    padding: 10px;
+}
+.demo-data:nth-child(odd) {
+    background-color: #957dcd;
+}
+.demo-data:nth-child(even) {
+    background-color: #ab98ca;
+}
