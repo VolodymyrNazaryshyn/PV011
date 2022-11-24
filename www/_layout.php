@@ -19,6 +19,17 @@
                 <li><a href="/db">Работа с БД</a></li>
             </ul>
         </nav>
+        
+        <?php if( is_array( $_AUTH ) ) { ?>
+            <b>Hello</b>
+        <?php } else {  ?>
+            <form method="post">
+                <label><input name="userlogin" placeholder="login" /></label>
+                <label><input name="userpassw" type="password" /></label>
+                <button>Log in</button>
+            </form>
+            <?php if( is_string( $_AUTH ) ) { echo $_AUTH ; } ?>
+        <?php }  ?>
     </header>
 
     <!-- Render body -->

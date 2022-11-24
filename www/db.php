@@ -105,16 +105,16 @@
         <p>
             DML - язык манипулирования данными
             <?php
-            $x = random_int(1000, 10000) ; 
-            $s = bin2hex( random_bytes(8) ) ;
-            $sql = "INSERT INTO demo VALUES( UUID(), $x, '$s' ) " ;
-            try {
-               $connection->query( $sql ) ;
-               echo "INSERT OK" ;
-            }
-            catch( PDOException $ex ) {
-               echo $ex->getMessage() ;
-            }
+            // $x = random_int(1000, 10000) ; 
+            // $s = bin2hex( random_bytes(8) ) ;
+            // $sql = "INSERT INTO demo VALUES( UUID(), $x, '$s' ) " ;
+            // try {
+            //    $connection->query( $sql ) ;
+            //    echo "INSERT OK" ;
+            // }
+            // catch( PDOException $ex ) {
+            //    echo $ex->getMessage() ;
+            // }
             ?>
         </p>
         <p>
@@ -151,19 +151,6 @@
             }
             ?>
         </p>
-        
-        <!-- Д.З. 
-        ✅ Реализовать запрос к БД на выдачу данных
-        ✅ Отобразить данные в виде таблицы (HTML)
-        ✅ ** Предполагать, что количество и названия полей заранее не известны
-        +--------------------------------------+---------+------------------+
-        | id                                   | var_int | val_str          |
-        +--------------------------------------+---------+------------------+
-        | 4100e2d4-676d-11ed-9c3a-3c7c3fbb1a48 |    6546 | d73cabc610249b7f |
-        | 50fe5bf3-676d-11ed-9c3a-3c7c3fbb1a48 |    6505 | 665b32b2398e36aa |
-        | 51bdd02d-676d-11ed-9c3a-3c7c3fbb1a48 |    4214 | e774c1969553c5ff |
-        +--------------------------------------+---------+------------------+ 
-        -->
 
     </main>
 </div>
