@@ -30,6 +30,7 @@
             </form>
             <?php if( is_string( $_AUTH ) ) { echo $_AUTH ; } ?>
         <?php }  ?>
+        <button type="button" onclick="location = '/register'">Register</button>
     </header>
 
     <!-- Render body -->
@@ -40,8 +41,9 @@
         case 'basics'       : 
         case 'fundamentals' : 
         case 'layout'       : 
+        case 'formdata'     :
         case 'db'           : 
-        case 'formdata'     : include "{$path_parts[1]}.php" ; break ;
+        case 'register'     : include "{$path_parts[1]}.php" ; break ;
         default             : include "404.php";
     }
     ?>
