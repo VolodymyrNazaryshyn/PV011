@@ -1,55 +1,31 @@
-/* Style for _layout.php */
-header {
-    align-items: center;
-    background: linear-gradient(to bottom,rgba(94,83,115,1) 50%,rgb(71, 151, 143) 100%);
-    box-shadow: 0 0 25px 1px black;
-    display: flex;
-    height: 60px;
-    position: fixed;
-    left: 0;
-    right: 0;
-    top: 0;
+*,*:before,*:after{
+	padding: 0;
+	margin: 0;
+	border: 0;
+	box-sizing: border-box;
 }
-header * {
-    display: inline;
-}
-.logo {
-    margin-left: 20px;
-    max-height: 50px;
-}
-header li {
-    margin: 15px;
-}
-header li a {
-    color: bisque;
-    font-weight: bold;
-    text-decoration: none;
-}
-header li a:hover {
-    color: aqua;
-}
-/* ------------------------------- */
-/* Style for footer.php */
 html,
 body {
     height: 100%;
     margin: 30px 0 0 0;
-    background-color: lightgrey;
+	background-color: lightgrey;
+    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+}
+.main_wrapper {
+	min-height: 100%;
+	display: flex;
+	flex-direction: column;
 }
 .wrapper {
-    display: flex;
-    flex-direction: column;
-    min-height: 100%;
     margin: 30px;
 }
-main {
-    flex: 1 1 auto;
-}
+/* ------------------------------- */
+/* Style for footer.php */
 footer {
     align-items: center;
-    background: linear-gradient(to bottom,rgb(71, 151, 143) 10%, rgba(94,83,115,1) 80%);
+    background-color: #5e5373;
     box-shadow: 0 0 5px 0 black;
-    color: bisque;
+    color: #fff;
     display: flex;
     font-weight: bold;
     height: 50px;
