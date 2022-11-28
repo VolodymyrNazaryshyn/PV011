@@ -32,93 +32,95 @@
     <p>
         Массивы в PHP ассоциативные
     </p>
-    <div style="border: 1px solid green">
-    <?php
-        $x = 20;
-        $x += 10; // арифметический "+"
-        $x .= '.'; // строковый "+" - "."
-        $x .= '12';
-        if(isset($x)) {
-            echo "X already defined: $x ",
-                is_numeric($x) ? "Numeric" : "NaN";
-        }
-        else  {
-            print('<script>console.log("X not defined")</script>');
-            echo "X not defined";
-        }
-        echo "<br/>";
-        # Arrays
-        $arr = [];       // новый стиль
-        $arr2 = array(); // старый стиль
-        $arr[] = 10;     // push - добавление в массив
-        $arr[] = 20;     // без указания индекса - присваиваются
-        $arr[] = 30;     // порядковые числовые индексы
-    
-        foreach($arr as $val) { // for-of (по значениям)
-            echo "$val <br/>";
-        }
-    
-        $arr[10] = 'ten'; // указание индекса-ключа
-        $arr['five'] = 5;
-        $arr[] = 'next';
-        $arr['2'] = 200; // 2 (число) '2' (строка) - одно и то же
-        $arr[true] = 'true'; // true == 1
-        $arr['true'] = true;
-    
-        foreach($arr as $key => $val) { // по парам ключ-значение
-            echo "arr[$key] = $val <br/>";
-        }
-        $arr3 = [ // конструктор массива
-            'host' => 'localhost', // => - ассоциативное присваивание
-            'ip' => '127.0.0.1',
-            'auth' => [
-                'user' => 'admin',
-                'pass' => '123'
-            ]
-        ];
-        echo count($arr3), '<br/>';
-        foreach($arr3 as $key => $val) {
-            if(is_array($val)) { // если значение в массиве - тоже массив
-                foreach($val as $k => $v) {
-                    echo "arr[$key][$k] = $v <br/>";
-                }
+    <div class="fundamentals-arrays">
+        <?php
+            $x = 20;
+            $x += 10; // арифметический "+"
+            $x .= '.'; // строковый "+" - "."
+            $x .= '12';
+            if(isset($x)) {
+                echo "X already defined: $x ",
+                    is_numeric($x) ? "Numeric" : "NaN";
             }
-            else {
+            else  {
+                print('<script>console.log("X not defined")</script>');
+                echo "X not defined";
+            }
+            echo "<br/>";
+            # Arrays
+            $arr = [];       // новый стиль
+            $arr2 = array(); // старый стиль
+            $arr[] = 10;     // push - добавление в массив
+            $arr[] = 20;     // без указания индекса - присваиваются
+            $arr[] = 30;     // порядковые числовые индексы
+        
+            foreach($arr as $val) { // for-of (по значениям)
+                echo "$val <br/>";
+            }
+        
+            $arr[10] = 'ten'; // указание индекса-ключа
+            $arr['five'] = 5;
+            $arr[] = 'next';
+            $arr['2'] = 200; // 2 (число) '2' (строка) - одно и то же
+            $arr[true] = 'true'; // true == 1
+            $arr['true'] = true;
+        
+            foreach($arr as $key => $val) { // по парам ключ-значение
                 echo "arr[$key] = $val <br/>";
             }
-        }
-        // внутренняя индексация - дополнительные [], вложенность не ограничена
-        // $arr3['auth']['pass']
-        const CONST_VALUE = 100500; // константа без $, рекомендуется CAPITAL_CASE
-        echo CONST_VALUE, '<br/>';
-    
-        echo makeHello(), ' ', makeHello("User"), '<br/>';
-    
-        // принцип "поднятия" работает - можно вызывать до определения (в файле)
-        function makeHello($user = "Admin") { // значение по умолчанию есть
-            global $x; // для использования глобальной пер. указываем global
-            return "Hello $user" 
-                . CONST_VALUE // константы доступны
-                . $x; // переменные (просто) недоступны
-        }
-    ?>
+            $arr3 = [ // конструктор массива
+                'host' => 'localhost', // => - ассоциативное присваивание
+                'ip' => '127.0.0.1',
+                'auth' => [
+                    'user' => 'admin',
+                    'pass' => '123'
+                ]
+            ];
+            echo count($arr3), '<br/>';
+            foreach($arr3 as $key => $val) {
+                if(is_array($val)) { // если значение в массиве - тоже массив
+                    foreach($val as $k => $v) {
+                        echo "arr[$key][$k] = $v <br/>";
+                    }
+                }
+                else {
+                    echo "arr[$key] = $val <br/>";
+                }
+            }
+            // внутренняя индексация - дополнительные [], вложенность не ограничена
+            // $arr3['auth']['pass']
+            const CONST_VALUE = 100500; // константа без $, рекомендуется CAPITAL_CASE
+            echo CONST_VALUE, '<br/>';
+        
+            echo makeHello(), '<br/>', makeHello("User"), '<br/>';
+        
+            // принцип "поднятия" работает - можно вызывать до определения (в файле)
+            function makeHello($user = "Admin") { // значение по умолчанию есть
+                global $x; // для использования глобальной пер. указываем global
+                return "Hello $user" 
+                    . CONST_VALUE // константы доступны
+                    . $x; // переменные (просто) недоступны
+            }
+        ?>
     </div>
-    <ul>
-        <?php for( $i = 1; $i <= $x; $i++ ) { ?>
-            <?php if( $i % 10 == 0 ) { ?>
-                <li>
-                    <?= $i ?>
-                </li>
+    <div class="fundamentals-loop-for">
+        <ul>
+            <?php for( $i = 1; $i <= $x; $i++ ) { ?>
+                <?php if( $i % 10 == 0 ) { ?>
+                    <li>
+                        <?= $i ?>
+                    </li>
+                <?php } ?>
             <?php } ?>
-        <?php } ?>
-    </ul>
-    <ul>
-        <?php for( $i = 1; $i <= $x; $i++ ) : ?>
-            <?php if( $i % 10 == 0 ) : ?>
-                <li>
-                    <?= $i ?>
-                </li>
-            <?php endif ?>
-        <?php endfor ?>
-    </ul>
+        </ul>
+        <ul>
+            <?php for( $i = 1; $i <= $x; $i++ ) : ?>
+                <?php if( $i % 10 == 0 ) : ?>
+                    <li>
+                        <?= $i ?>
+                    </li>
+                <?php endif ?>
+            <?php endfor ?>
+        </ul>
+    </div>
 </div>

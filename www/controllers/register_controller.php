@@ -2,6 +2,29 @@
 // одна из задач контроллера - разделить работу по методам запроса
 // echo "<pre>" ; print_r( $_SERVER ) ;
 
+$reg_error = [
+    'login_err' => [
+        0 => 'Empty login',
+        1 => 'Login length must be more than 3 symbols',
+        2 => 'Login in use'
+    ],
+    'userName_err' => [
+        0 => 'Empty username',
+        1 => 'Username couldn\'t contain space(s)'
+    ],
+    'password_err' => [
+        0 => 'Empty password',
+        1 => 'Password doesn\'t follow the pattern: Minimum 8 characters, one digit, one uppercase letter and one lowercase letter'
+    ],
+    'confirm_err' => [
+        0 => 'Passwords mismatch'
+    ],
+    'email_err' => [
+        0 => 'Empty email',
+        1 => 'Email doesn\'t follow the pattern (example: volodimir@gmail.com, Alex@mail.odessa.ua)'
+    ]
+];
+
 session_start() ; // сессии - перед обращением к сессии обязательно $_SESSION[] - формируется стартом
 switch( strtoupper( $_SERVER[ 'REQUEST_METHOD' ] ) ) {
 case 'GET'  :
@@ -24,16 +47,31 @@ case 'GET'  :
 case 'POST' :
     // данные формы регистрации - обрабатываем
     if( empty( $_POST['login'] ) ) {
-        $_SESSION[ 'reg_error' ] = "Empty login" ;
+        $_SESSION[ 'reg_error' ] = $reg_error['login_err'][0] ;
+    }
+    else if ( strlen($_POST['login']) < 3 ) {
+        $_SESSION[ 'reg_error' ] = $reg_error['login_err'][1] ;
+    }
+    else if ( empty( $_POST['userName'] ) ) {
+        $_SESSION[ 'reg_error' ] = $reg_error['userName_err'][0] ;
+    }
+    else if ( preg_match( "/\s/", $_POST['userName'] ) ) {
+        $_SESSION[ 'reg_error' ] = $reg_error['userName_err'][1] ;
     }
     else if( empty( $_POST['userPassword1'] ) ) {
-        $_SESSION[ 'reg_error' ] = "Empty userPassword1" ;
+        $_SESSION[ 'reg_error' ] = $reg_error['password_err'][0] ;
     }
-    else if( empty( $_POST['email'] ) ) {
-        $_SESSION[ 'reg_error' ] = "Empty email" ;
+    else if ( !preg_match( "/^(?=^.{8,}$)((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/", $_POST['userPassword1'] ) ) {
+        $_SESSION[ 'reg_error' ] = $reg_error['password_err'][1] ;
     }
     else if( $_POST['userPassword1'] !== $_POST['confirm'] ) {
-        $_SESSION[ 'reg_error' ] = "Passwords mismatch" ;
+        $_SESSION[ 'reg_error' ] = $reg_error['confirm_err'][0] ;
+    } 
+    else if( empty( $_POST['email'] ) ) {
+        $_SESSION[ 'reg_error' ] = $reg_error['email_err'][0] ;
+    }
+    else if( !preg_match( "/^[A-z][A-z\d_]{3,16}@([a-z]{1,10}\.){1,5}[a-z]{2,3}$/", $_POST['email'] ) ) {
+        $_SESSION[ 'reg_error' ] = $reg_error['email_err'][1] ;
     } else {
         try {
             $prep = $connection->prepare(
@@ -45,7 +83,7 @@ case 'POST' :
             $_SESSION[ 'reg_error' ] = $ex->getMessage() ;
         }
         if( $cnt > 0 ) {
-            $_SESSION[ 'reg_error' ] = "Login in use" ;
+            $_SESSION[ 'reg_error' ] = $reg_error['login_err'][2] ;
         }
     }
     if( empty( $_SESSION[ 'reg_error' ] ) ) { // не было ошибок выше
@@ -75,7 +113,7 @@ case 'POST' :
     break ;
 }
 
-/*
-Д.З. Реализовать валидацию эл. почты пользователя
-стилизовать вывод сообщения об успешной регистрации
+/* Д.З.
+✅ Реализовать валидацию эл. почты пользователя
+✅ Стилизовать вывод сообщения об успешной регистрации
 */

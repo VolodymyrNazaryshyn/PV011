@@ -1,25 +1,5 @@
 <div class="wrapper">
-    <h2>Формы. Данные форм.</h2>
-    <form method="get">
-        <label>Введите строку: <input name="str" /></label>
-        <br/>
-        <button>Послать GET</button>
-    </form>
-
-    <form method="post">
-        <label>Введите строку: <input name="strp" /></label>
-        <br/>
-        <button>Послать POST</button>
-    </form>
-
-    <form method="post" enctype="multipart/form-data">
-        <label>файл: <input type="file" name="formfile" /></label>
-        <br/>
-        <label>Введите описание: <input name="descr" value="A file" /></label><br/>
-        <label>Введите описание: <input disabled name="bescr" value="B file" /></label>
-        <br/>
-        <button>Послать файл</button>
-    </form>
+    <h1>Формы. Данные форм.</h1>
 
     <p>
         Все GET-параметры (передаваемые в адресной строке после ?)
@@ -27,6 +7,12 @@
         <br/>
         $_GET: <?php print_r( $_GET ) ?>
     </p>
+
+    <form class="formdata-form" method="get">
+        <label>Введите строку: <input class="formdata-input" name="str" /></label>
+        <button class="formdata-btn">Послать GET</button>
+    </form>
+
     <p>
         POST-данные передаются в теле запроса, в адресной строке их
         не видно. Значения попадают в массив 
@@ -36,12 +22,19 @@
         GET- и POST- данные могут приходить одновременно, но только 
         не GET-запросом (он не должен иметь тела)
     </p>
+
+    <form class="formdata-form" method="post">
+        <label>Введите строку: <input class="formdata-input" name="strp" /></label>
+        <button class="formdata-btn">Послать POST</button>
+    </form>
+
     <p>
         Массив $_REQUEST является объединением GET- и POST- данных
         но для использования не рекомендуется
         <br/>
         $_REQUEST: <?php print_r( $_REQUEST ) ?>
     </p>
+
     <p>
         Файлы, передаваемые формой, сохраняются в временной папке
         сервера и удаляются после обработки запроса. Если файл нужен
@@ -52,6 +45,15 @@
         собираются в отдельном глобальном массиве $_FILES:
         <pre><?php print_r( $_FILES ) ?></pre>
     </p>
+
+    <form class="formdata-form" method="post" enctype="multipart/form-data">
+        <label class="formdata-label-file-input">Файл: <input type="file" name="formfile" /></label>
+        <label>Введите описание: <input class="formdata-input" name="descr" value="A file" /></label>
+        <input class="formdata-input" disabled name="bescr" value="B file" />
+        <br/>
+        <button class="formdata-btn">Послать файл</button>
+    </form>
+
     <?php
         $ext_array = ['png', 'jpg', 'gif', 'jpeg']; // Массив доступных расширений
         if( isset( $_FILES['formfile'] ) ) { // Передача есть

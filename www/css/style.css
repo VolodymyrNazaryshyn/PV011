@@ -19,6 +19,32 @@ body {
 .wrapper {
     margin: 30px;
 }
+p {
+    margin-bottom: 10px;
+    text-align: justify;
+}
+h1,h2,h3,h4,h5,h6 {
+    margin: 10px 0px;
+}
+button {
+    cursor: pointer;
+}
+/* ------------------------------- */
+/* Style for index.php */
+.inner-ul {
+    margin-left: 30px;
+}
+/* ------------------------------- */
+/* Style for fundamentals.php */
+.fundamentals-arrays {
+    border: 1px solid green;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+.fundamentals-loop-for {
+    display: flex;
+    justify-content: space-around;
+}
 /* ------------------------------- */
 /* Style for footer.php */
 footer {
@@ -61,7 +87,7 @@ footer {
     margin: 10px;
 }
 .page-404__title__circle {
-    background-color: #4169E1;
+    background-color: #706486;
     border-radius: 1em;
     height: 1em;
     width: 1em;
@@ -73,6 +99,26 @@ footer {
 }
 /* ------------------------------- */
 /* Style for formdata.php */
+.formdata-form {
+    margin-bottom: 5px;
+}
+.formdata-input {
+    border: 1px solid black;
+    padding: 5px;
+}
+.formdata-btn {
+    background-color: #ab98ca;
+    border: 1px solid black;
+    font-weight: bold;
+    padding: 5px;
+}
+.formdata-btn:hover {
+    background-color: #957dcd;
+}
+.formdata-label-file-input {
+    display: block;
+    margin-bottom: 5px;
+}
 .error {
     color: red;
 }
@@ -99,6 +145,11 @@ footer {
 }
 .demo-data:nth-child(even) {
     background-color: #ab98ca;
+}
+@media (max-width: 767px) {
+    .demo {
+        font-size: 12.3px;
+    }
 }
 /* ------------------------------- */
 /* Style for register.php */
@@ -174,4 +225,20 @@ footer {
 .reg-error {
     color: red;
     font-weight: 900;
+}
+.reg-dialog {
+    background-color: #ab98ca;
+    border: 1px solid black;
+    border-radius: 5px;
+    box-shadow: 0px 0px 5px black;
+    height: 150px;
+    margin: auto;
+    width: 150px;
+}
+.reg-ok {
+    color: white;
+    font-weight: 900;
+    letter-spacing: 2px;
+    text-shadow: 1px 1px 1px blue;
+    margin: 60px 0px 0px 40px;
 }

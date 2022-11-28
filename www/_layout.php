@@ -6,14 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/burger_menu.css" />
-    <title>PV011</title>
+    <title>PHP</title>
 </head>
 <body>
     <div class="main_wrapper">
         <header class="main_header">
             <div class="main_container">
                 <div class="header__body">
-                    <a href="#" class="header__logo">
+                    <a href="/index" class="header__logo">
                         <img src="/img/php.png" alt="logo">
                     </a>
                     <div class="header__burger" id="header__burger">
@@ -21,13 +21,13 @@
                     </div>
                     <nav class="header__menu" id="header__menu">
                         <ul class="header__list">
-                            <li><a href="/basics" class="header__link">Введение в РНР</a></li>
-                            <li><a href="/fundamentals" class="header__link">Основы РНР</a></li>
-                            <li><a href="/layout" class="header__link">Шаблонизация</a></li>
-                            <li><a href="/formdata" class="header__link">Данные форм</a></li>
-                            <li><a href="/db" class="header__link">Работа с БД</a></li>
-                            <li><a href="/authorization" class="header__link">Авторизация</a></li>
-                            <li><a href="/register" class="header__link">Регистрация</a></li>
+                            <li><a href="/basics" class="header__link">Intro РНР</a></li>
+                            <li><a href="/fundamentals" class="header__link">Fundament РНР</a></li>
+                            <li><a href="/layout" class="header__link">Pattern</a></li>
+                            <li><a href="/formdata" class="header__link">Formdata</a></li>
+                            <li><a href="/db" class="header__link">Db</a></li>
+                            <li><a href="/authorization" class="header__link">Log in</a></li>
+                            <li><a href="/register" class="header__link">Register</a></li>
                         </ul>
                     </nav>
                 </div>
