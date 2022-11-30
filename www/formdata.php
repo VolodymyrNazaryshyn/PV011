@@ -70,7 +70,7 @@
                         ) ;
                         echo '<b class="success">✅ The file was copied successfully!</b>';
                     } else {
-                        echo "<b class=\"error\">🚫 '$extension' is invalid extension, choose from 'png', 'gif', 'jpeg'<b>";
+                        echo "<b class=\"error\">🚫 '$extension' is invalid extension, choose from 'png', 'jpg', 'gif', 'jpeg'<b>";
                     }
                 } else {
                     echo '<b class="error">🚫 No data!<b>';

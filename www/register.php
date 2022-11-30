@@ -19,12 +19,11 @@
                 <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
             <?php endif ?>
             
-            <form class="registerForm" method="post">
+            <form class="registerForm" method="post" enctype="multipart/form-data">
                 <div class="reg-form-control-wrapper">
                     <div class="reg-form-control">
-                        <label for="login">Login</label>
-                        <!-- required -->
-                        <input name="login" value='<?= (isset($view_data['login'])) ? $view_data['login'] : "" ?>' /> 
+                        <label>Login</label>
+                        <input name="login" required value='<?= (isset($view_data['login'])) ? $view_data['login'] : "" ?>' /> 
                         <?php if( isset( $view_data[ 'reg_error' ] ) && in_array( $view_data[ 'reg_error' ], $reg_error[ 'login_err' ] ) ) : ?>
                             <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
                         <?php endif ?>
@@ -32,7 +31,7 @@
                 </div>
                 <div class="reg-form-control-wrapper">
                     <div class="reg-form-control">
-                        <label for="userName">Username</label>
+                        <label>Username</label>
                         <input name="userName" value='<?= (isset($view_data['userName'])) ? $view_data['userName'] : "" ?>' />
                         <?php if( isset( $view_data[ 'reg_error' ] ) && in_array( $view_data[ 'reg_error' ], $reg_error[ 'userName_err' ] ) ) : ?>
                             <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
@@ -41,9 +40,8 @@
                 </div>
                 <div class="reg-form-control-wrapper">
                     <div class="reg-form-control">
-                        <label for="userPassword1">Password</label>
-                        <!-- required -->
-                        <input type="password" name="userPassword1" />
+                        <label>Password</label>
+                        <input type="password" required name="userPassword1" />
                         <?php if( isset( $view_data[ 'reg_error' ] ) && in_array( $view_data[ 'reg_error' ], $reg_error[ 'password_err' ] ) ) : ?>
                             <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
                         <?php endif ?>
@@ -51,7 +49,7 @@
                 </div>
                 <div class="reg-form-control-wrapper">
                     <div class="reg-form-control">
-                        <label for="confirm">Confirm password</label>
+                        <label>Confirm password</label>
                         <input type="password" name="confirm" />
                         <?php if( isset( $view_data[ 'reg_error' ] ) && in_array( $view_data[ 'reg_error' ], $reg_error[ 'confirm_err' ] ) ) : ?>
                             <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
@@ -60,12 +58,17 @@
                 </div>
                 <div class="reg-form-control-wrapper">
                     <div class="reg-form-control">
-                        <label for="email">Email</label>
-                        <!-- required -->
-                        <input type="email" name="email" value='<?= (isset($view_data['email'])) ? $view_data['email'] : "" ?>' />
+                        <label>Email</label>
+                        <input type="email" name="email" required value='<?= (isset($view_data['email'])) ? $view_data['email'] : "" ?>' />
                         <?php if( isset( $view_data[ 'reg_error' ] ) && in_array( $view_data[ 'reg_error' ], $reg_error[ 'email_err' ] ) ) : ?>
                             <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
                         <?php endif ?>
+                    </div>
+                </div>
+                <div class="reg-form-control-wrapper">
+                    <div class="reg-form-control">
+                        <label>Avatar</label>
+                        <input type="file" name="avatar" />
                     </div>
                 </div>
                 <button class="reg-button">Registration</button>

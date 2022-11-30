@@ -22,12 +22,24 @@
                     <nav class="header__menu" id="header__menu">
                         <ul class="header__list">
                             <li><a href="/basics" class="header__link">Intro РНР</a></li>
-                            <li><a href="/fundamentals" class="header__link">Fundament РНР</a></li>
+                            <li><a href="/fundamentals" class="header__link">Fund РНР</a></li>
                             <li><a href="/layout" class="header__link">Pattern</a></li>
                             <li><a href="/formdata" class="header__link">Formdata</a></li>
                             <li><a href="/db" class="header__link">Db</a></li>
-                            <li><a href="/authorization" class="header__link">Log in</a></li>
                             <li><a href="/register" class="header__link">Register</a></li>
+
+                            <?php if( is_array( $_CONTEXT[ 'auth_user' ] ) ) { ?>
+                                <li><b>Hello, <?= $_CONTEXT[ 'auth_user' ][ 'name' ] ?></b></li>
+                                <?=  $_CONTEXT[ 'auth_interval' ] ?>
+                                <!-- Кнопка выхода из авторизованного режима - ссылка передающая параметр "logout" -->
+                                <li>
+                                    <a href="?logout" class="header__link">
+                                        <img class="logout" src="/img/logout.png" alt="logo">
+                                    </a>
+                                </li>
+                            <?php } else {  ?>
+                                <li><a href="/authorization" class="header__link">Log in</a></li>
+                            <?php }  ?>
                         </ul>
                     </nav>
                 </div>

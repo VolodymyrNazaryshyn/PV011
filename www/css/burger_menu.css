@@ -142,3 +142,7 @@ main.main_container {
 		color: #5e5373;
 	}
 }
+img.logout {
+	border-radius: 50%;
+	width: 20px;
+}
