@@ -15,7 +15,8 @@
 
             <?php if( isset( $view_data[ 'reg_error' ] ) && !( in_array( $view_data[ 'reg_error' ], $reg_error[ 'login_err' ] ) 
                 || in_array( $view_data[ 'reg_error' ], $reg_error[ 'userName_err' ] ) || in_array( $view_data[ 'reg_error' ], $reg_error[ 'password_err' ] )
-                || in_array( $view_data[ 'reg_error' ], $reg_error[ 'confirm_err' ] ) || in_array( $view_data[ 'reg_error' ], $reg_error[ 'email_err' ] ) ) ) : ?>
+                || in_array( $view_data[ 'reg_error' ], $reg_error[ 'confirm_err' ] ) || in_array( $view_data[ 'reg_error' ], $reg_error[ 'email_err' ] ) 
+                || in_array( $view_data[ 'reg_error' ], $reg_error[ 'file_err' ] ) ) ) : ?>
                 <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
             <?php endif ?>
             
@@ -69,6 +70,9 @@
                     <div class="reg-form-control">
                         <label>Avatar</label>
                         <input type="file" name="avatar" />
+                        <?php if( isset( $view_data[ 'reg_error' ] ) && in_array( $view_data[ 'reg_error' ], $reg_error[ 'file_err' ] ) ) : ?>
+                            <div class="reg-error"><?= $view_data[ 'reg_error' ] ?></div>
+                        <?php endif ?>
                     </div>
                 </div>
                 <button class="reg-button">Registration</button>
