@@ -55,22 +55,22 @@
     </form>
 
     <?php
-        $ext_array = ['png', 'jpg', 'gif', 'jpeg']; // Массив доступных расширений
         if( isset( $_FILES['formfile'] ) ) { // Передача есть
             if( $_FILES['formfile']['error'] === 0 ) {  // Нет ошибки
                 if( $_FILES['formfile']['size'] > 0 ) { // Есть данные
-                    $full_path = $_FILES['formfile']['full_path'];
-                    $position = strrpos( $full_path, '.' ) ;
-                    $extension = substr( $full_path, $position + 1 ) ;
+                    $dot_position = strrpos( $_FILES['formfile']['name'], '.' ) ;
+                    $extension = substr( $_FILES['formfile']['name'], $dot_position ) ;
                     
-                    if( in_array($extension, $ext_array)  ) { // Присутствие в массиве значения
+                    if( in_array($extension, $_CONTEXT[ 'image_extensions' ])  ) { // Присутствие в массиве значения
                         move_uploaded_file( 
                             $_FILES['formfile']['tmp_name'],
                             './uploads/' . $_FILES['formfile']['name'] 
                         ) ;
                         echo '<b class="success">✅ The file was copied successfully!</b>';
                     } else {
-                        echo "<b class=\"error\">🚫 '$extension' is invalid extension, choose from 'png', 'jpg', 'gif', 'jpeg'<b>";
+                        $img_ext = "";
+                        foreach( $_CONTEXT[ 'image_extensions' ] as $val ) $img_ext .= $val . " ";
+                        echo "<b class=\"error\">🚫 '$extension' is invalid extension, choose from '{$img_ext}'<b>";
                     }
                 } else {
                     echo '<b class="error">🚫 No data!<b>';

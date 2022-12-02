@@ -24,7 +24,9 @@ $reg_error = [
         1 => 'Email doesn\'t follow the pattern (example: volodimir@gmail.com, Alex@mail.odessa.ua)'
     ],
     'file_err' => [
-        0 => "Invalid extension, choose from 'png', 'jpg', 'gif', 'jpeg'"
+        0 => 'File without type not supported',
+        1 => "Invalid extension, choose from '.png', '.jpg', '.gif', '.jpeg', '.svg'",
+        2 => 'File (avatar) uploading error'
     ]
 ];
 
@@ -49,7 +51,6 @@ case 'GET'  :
     break ;
 
 case 'POST' :
-    $file_name = $_FILES['avatar']['name'];
     // echo "<pre>" ; print_r( $_FILES ) ; exit ;
     // данные формы регистрации - обрабатываем
     if( empty( $_POST['login'] ) ) {
@@ -104,37 +105,35 @@ case 'POST' :
                 // есть переданный файл
                 $dot_position = strrpos( $_FILES['avatar']['name'], '.' ) ;  // strRpos ~ lastIndexOf
                 if( $dot_position === -1 ) {  // нет расширения у файла
-                    $_SESSION[ 'reg_error' ] = "File without type not supported" ;
+                    $_SESSION[ 'reg_error' ] = $reg_error['file_err'][0] ;
                 }
                 else {
                     $extension = substr( $_FILES['avatar']['name'], $dot_position ) ;  // расширение файла с точкой (".png")
-                    
-                    // Д.З. Загрузка аватарки:
-                    $ext_array = ['.png', '.jpg', '.gif', '.jpeg']; // Массив доступных расширений
-
-                    if( in_array($extension, $ext_array)  ) { // ✅ Проверить расширение файла на допустимый перечень (изображения)
-                        // убеждаемся, что в имени файла нету ../ (защита от DT)
-                        if( str_contains( $file_name, '../' ) ) $file_name = str_replace( '../', '', $file_name );
-                        
-                        $avatars = scandir( "./avatars/" ); // Получаем все файлы из директории
-
-                        // ✅ Сгенерировать случайное имя файла, сохранить расширение
-                        foreach( $avatars as $key => $val ) {
-                            if($file_name === $val) {
-                                $path_parts = pathinfo($val);
-                                $filename_only = $path_parts['filename']; // файл без расширения
-                                $file_ext = $path_parts['extension']; // расширение файла
-                                $file_name = $filename_only . bin2hex(random_bytes(16)) . '.' . $file_ext; // формируем новое имя файла
-                            }
-                        }
-
-                        // ✅ Загрузить файл в папку www/avatars
-                        move_uploaded_file( $_FILES['avatar']['tmp_name'], './avatars/' . $file_name ) ;
-                    } else {
-                        $_SESSION[ 'reg_error' ] = $reg_error['file_err'][0] ;
-                    }
-
+                    /*  Загрузка аватарки:
+                    	✅ проверить расширение файла на допустимый перечень
+                    	✅ сгенерировать случайное имя файла, сохранить расширение
+                    	✅ загрузить файл в папку www/avatars
+                    	✅ его имя добавить в параметры SQL-запроса и передать в БД
+                    */
                     // echo $extension ; exit ;
+                    if( ! array_search( $extension, ['.png','.jpg','.gif','.jpeg','.svg'] ) ) {
+                        $_SESSION[ 'reg_error' ] = $reg_error['file_err'][1] ;
+                    }
+                    else {
+                        $avatar_name = $_FILES['avatar']['name'] ;
+                        // убеждаемся, что в имени файла нету ../ (защита от DT)
+                        if( str_contains( $avatar_name, '../' ) ) $avatar_name = str_replace( '../', '', $avatar_name );
+                        
+                        $avatar_path = 'avatars/' ;
+
+                        do {
+                            $avatar_name = bin2hex(random_bytes(8)) . $extension ;
+                        } while( file_exists( $avatar_path . $avatar_name ) ) ;
+
+                        if( ! move_uploaded_file( $_FILES['avatar']['tmp_name'], $avatar_path . $avatar_name ) ) {
+                            $_SESSION[ 'reg_error' ] = $reg_error['file_err'][2] ;
+                        }
+                    }
                 }
             }
         }
@@ -146,20 +145,23 @@ case 'POST' :
         $pass = md5( $_POST['confirm'] . $salt );
         $confirm_code = bin2hex( random_bytes(3) ) ;
 
-        // ✅ Имя файла добавить в параметры SQL-запроса и передать в БД
-
         $sql = "INSERT INTO Users(`id`,`login`,`name`,`salt`,`pass`,`email`,`confirm`,`avatar`)
-                VALUES(UUID(),?,?,'$salt','$pass',?,'$confirm_code','$file_name')" ;
+                VALUES(UUID(),?,?,'$salt','$pass',?,'$confirm_code',?)" ;
         try {
             $prep = $connection->prepare( $sql ) ;
-            $prep->execute( [ $_POST['login'], $_POST['userName'], $_POST['email'] ] ) ;
+            $prep->execute( [ 
+                $_POST['login'], 
+                $_POST['userName'], 
+                $_POST['email'],
+                isset( $avatar_name ) ? $avatar_name : null
+            ] ) ;
             $_SESSION[ 'reg_ok' ] = "Reg ok" ;
         }
         catch( PDOException $ex ) {
             $_SESSION[ 'reg_error' ] = $ex->getMessage() ;
         }
     }
-    else { // были ошибки - сохраняем в сессии все введенные значения (кроме пароля)
+    else {
         $_SESSION[ 'login' ]    = $_POST['login'] ;
         $_SESSION[ 'email' ]    = $_POST['email'] ;
         $_SESSION[ 'userName' ] = $_POST['userName'] ;
