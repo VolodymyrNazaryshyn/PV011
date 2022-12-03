@@ -77,7 +77,7 @@ case 'POST' :
     else if( empty( $_POST['email'] ) ) {
         $_SESSION[ 'reg_error' ] = $reg_error['email_err'][0] ;
     }
-    else if( !preg_match( "/^[A-z][A-z\d_]{3,16}@([a-z]{1,10}\.){1,5}[a-z]{2,3}$/", $_POST['email'] ) ) {
+    else if( !preg_match( "/^[A-z][A-z\d_]{3,30}@([a-z]{1,10}\.){1,5}[a-z]{2,3}$/", $_POST['email'] ) ) {
         $_SESSION[ 'reg_error' ] = $reg_error['email_err'][1] ;
     } else {
         try {
@@ -110,13 +110,13 @@ case 'POST' :
                 else {
                     $extension = substr( $_FILES['avatar']['name'], $dot_position ) ;  // расширение файла с точкой (".png")
                     /*  Загрузка аватарки:
-                    	✅ проверить расширение файла на допустимый перечень
-                    	✅ сгенерировать случайное имя файла, сохранить расширение
-                    	✅ загрузить файл в папку www/avatars
-                    	✅ его имя добавить в параметры SQL-запроса и передать в БД
+                        проверить расширение файла на допустимый перечень
+                        сгенерировать случайное имя файла, сохранить расширение
+                        загрузить файл в папку www/avatars
+                        его имя добавить в параметры SQL-запроса и передать в БД
                     */
                     // echo $extension ; exit ;
-                    if( ! array_search( $extension, ['.png','.jpg','.gif','.jpeg','.svg'] ) ) {
+                    if( ! in_array( $extension, ['.png','.jpg','.gif','.jpeg','.svg'] ) ) {
                         $_SESSION[ 'reg_error' ] = $reg_error['file_err'][1] ;
                     }
                     else {
@@ -139,11 +139,25 @@ case 'POST' :
         }
     }
 
+    if( empty( $_SESSION[ 'reg_error' ] ) ) {
+        // подключаем фукнцию отправки почты
+        @include_once "helper/send_email.php" ;
+        if( ! function_exists( "send_email" ) ) {
+            $_SESSION[ 'reg_error' ] = "Inner error" ;
+        }
+    }
+
     if( empty( $_SESSION[ 'reg_error' ] ) ) { // не было ошибок выше
         // $_SESSION[ 'reg_error'] = "OK" ;
         $salt = md5( random_bytes(16) );
         $pass = md5( $_POST['confirm'] . $salt );
         $confirm_code = bin2hex( random_bytes(3) ) ;
+
+        // отправляем код на указанную почту        
+        send_email( $_POST['email'], 
+            "pv011.local Email verification", 
+            "<b>Hello, {$_POST['userName']}</b><br/>
+            Type code <strong>$confirm_code</strong> to confirm email" ) ;
 
         $sql = "INSERT INTO Users(`id`,`login`,`name`,`salt`,`pass`,`email`,`confirm`,`avatar`)
                 VALUES(UUID(),?,?,'$salt','$pass',?,'$confirm_code',?)" ;
