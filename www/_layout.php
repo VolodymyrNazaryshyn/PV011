@@ -29,18 +29,7 @@
                             <li><a style="color:hotpink" href="/email_test" class="header__link">E-mail</a></li>
                             <li><a href="/register" class="header__link">Register</a></li>
 
-                            <?php if( is_array( $_CONTEXT[ 'auth_user' ] ) ) { ?>
-                                <li><b>Hello, <?= $_CONTEXT[ 'auth_user' ][ 'name' ] ?></b></li>
-                                <img class='user-avatar' src='/avatars/<?= empty($_CONTEXT['auth_user']['avatar']) ? 'no-avatar.png' : $_CONTEXT['auth_user']['avatar'] ?>'>
-                                <!-- Кнопка выхода из авторизованного режима - ссылка передающая параметр "logout" -->
-                                <li>
-                                    <a href="?logout" class="header__link">
-                                        <img class="logout" src="/img/logout.png" alt="logo">
-                                    </a>
-                                </li>
-                            <?php } else {  ?>
-                                <li><a href="/authorization" class="header__link">Log in</a></li>
-                            <?php }  ?>
+                            <?php include "_auth.php" ?>
                         </ul>
                     </nav>
                 </div>
