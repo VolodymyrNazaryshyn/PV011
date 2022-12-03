@@ -26,11 +26,12 @@
                             <li><a href="/layout" class="header__link">Pattern</a></li>
                             <li><a href="/formdata" class="header__link">Formdata</a></li>
                             <li><a href="/db" class="header__link">Db</a></li>
+                            <li><a style="color:hotpink" href="/email_test" class="header__link">E-mail</a></li>
                             <li><a href="/register" class="header__link">Register</a></li>
 
                             <?php if( is_array( $_CONTEXT[ 'auth_user' ] ) ) { ?>
                                 <li><b>Hello, <?= $_CONTEXT[ 'auth_user' ][ 'name' ] ?></b></li>
-                                <?=  $_CONTEXT[ 'auth_interval' ] ?>
+                                <img class='user-avatar' src='/avatars/<?= empty($_CONTEXT['auth_user']['avatar']) ? 'no-avatar.png' : $_CONTEXT['auth_user']['avatar'] ?>'>
                                 <!-- Кнопка выхода из авторизованного режима - ссылка передающая параметр "logout" -->
                                 <li>
                                     <a href="?logout" class="header__link">
@@ -56,6 +57,7 @@
                     case 'formdata'     :
                     case 'db'           : 
                     case 'authorization': 
+                    case 'email_test'   :
                     case 'register'     : include "{$path_parts[1]}.php" ; break ;
                     default             : include "404.php";
                 }
