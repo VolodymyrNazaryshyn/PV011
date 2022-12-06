@@ -116,7 +116,7 @@ case 'POST' :
                         его имя добавить в параметры SQL-запроса и передать в БД
                     */
                     // echo $extension ; exit ;
-                    if( ! in_array( $extension, ['.png','.jpg','.gif','.jpeg','.svg'] ) ) {
+                    if( ! in_array( $extension, $_CONTEXT[ 'image_extensions' ] ) ) {
                         $_SESSION[ 'reg_error' ] = $reg_error['file_err'][1] ;
                     }
                     else {

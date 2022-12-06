@@ -20,6 +20,7 @@
 /www/ini/*
 /lib/*
 /www/avatars/*
+/www/uploads/*
 
 # CakePHP 2
 

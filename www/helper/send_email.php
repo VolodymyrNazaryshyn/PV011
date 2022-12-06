@@ -27,7 +27,7 @@ function send_email( $to, $subject, $body ) {
     $mail->IsHTML( true ) ;
     $mail->Subject = $subject ;
     $mail->Body    = $body ;
-    $mail->addAttachment('avatars/no-avatar.png'); // Attach an image file
+    // $mail->addAttachment('avatars/no-avatar.png'); // Attach an image file
     $mail->AddAddress( $to ) ; // denniksam@gmail.com
     
     if( !$mail->Send() )

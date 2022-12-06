@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="/css/style.css" />
     <link rel="stylesheet" href="/css/burger_menu.css" />
-    <title>PHP</title>
+    <title>PV011 <?= $_CONTEXT['page_title'] ?? '' ?></title>
 </head>
 <body>
     <div class="main_wrapper">
@@ -48,6 +48,7 @@
                     case 'authorization': 
                     case 'email_test'   :
                     case 'register'     : include "{$path_parts[1]}.php" ; break ;
+                    case 'profile'      : include "views/{$path_parts[1]}.php" ; break ;
                     default             : include "404.php";
                 }
             ?>
