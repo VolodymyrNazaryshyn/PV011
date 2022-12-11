@@ -3,10 +3,6 @@ main.main_container {
 	flex: 1 1 auto;
 }
 .main_container {
-	display: flex;
-    align-items: center;
-    justify-content: center;
-	flex-direction: column;
 	max-width: 1180px;
 	margin: 0px auto;
 	padding: 0px 10px;

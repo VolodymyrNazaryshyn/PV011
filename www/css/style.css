@@ -244,6 +244,13 @@ footer {
 }
 /* ------------------------------- */
 /* Style for profile.php */
+.profile-container {
+    align-items: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+    padding-top: 30px;
+}
 .profile-avatar {
     border: 1px solid black;
     border-radius: 50%;
