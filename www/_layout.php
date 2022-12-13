@@ -48,6 +48,7 @@
                     case 'authorization': 
                     case 'email_test'   :
                     case 'register'     : include "{$path_parts[1]}.php" ; break ;
+                    case 'shop'         :
                     case 'profile'      : include "views/{$path_parts[1]}.php" ; break ;
                     default             : include "404.php";
                 }
