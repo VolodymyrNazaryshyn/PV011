@@ -23,13 +23,13 @@ $_CONTEXT[ 'logger' ] = make_logger() ;
 $_CONTEXT[ 'show500' ] = function() { header( "Location: /page500.html" ) ; exit ; } ;
 
 // ~MiddleWare
-include "Services/dbms.php" ;
+include "services/dbms.php" ;
 if( empty( $connection ) ) {
     $_CONTEXT[ 'show500' ]() ; // exit - inside function
 }
 $_CONTEXT[ 'connection' ] = $connection ;
 
-include "Services/auth.php" ;
+include "services/auth.php" ;
 
 // ~Controllers
 $controller_file = "controllers/" . $path_parts[1] . "_controller.php" ; // [1] - первая непустая часть (суть контроллер)
