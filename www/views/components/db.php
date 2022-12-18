@@ -11,7 +11,7 @@
         <p>
             Подключаемся к СУБД:<br/>
             <b>а)</b> через консоль (терминал)<br/>
-            <b>б)</b> phpmyadmin (<a href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a>)<br/>
+            <b>б)</b> phpmyadmin (<a target="_blank" href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a>)<br/>
             <b>в)</b> стороннее ПО для БД: MySQL Workbench, DBeaver, ...<br/>
             <br/>
             (дальше на примере терминала)
